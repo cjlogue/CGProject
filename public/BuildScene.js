@@ -1,5 +1,5 @@
 import * as THREE from './three.module.js';
-import {BoxBufferGeometry} from "./three.module.js";
+import {BoxBufferGeometry, CylinderBufferGeometry, PlaneGeometry} from "./three.module.js";
 
 const displayNext =  (itemArray, itemIdx, key) => {
 
@@ -24,6 +24,9 @@ const displayNext =  (itemArray, itemIdx, key) => {
     }
     else if (key === "eye") {
         eyeIndex = itemIdx + 1;
+    }
+    else if (key === "nose") {
+        noseIndex = itemIdx + 1;
     }
 
 }
@@ -53,15 +56,24 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     else if (key === "eye") {
         eyeIndex = itemIdx - 1;
     }
+    else if (key === "nose") {
+        noseIndex = itemIdx - 1;
+    }
 
 }
 
 
 var hatIndex;
 var eyeIndex;
-// Create all elements of the Snow Buddy
+var noseIndex;
+var mouthIndex;
+
 var hatArray = [];
 var eyeArray = [];
+var noseArray = [];
+var mouthArray = [];
+
+// Create all elements of the Snow Buddy
 const SnowBuddy = () => {
 
     //Materials
@@ -95,6 +107,15 @@ const SnowBuddy = () => {
     const birthdayPuff = new THREE.MeshPhongMaterial({
         color: 0xdc57e2});
 
+    const icicleColor = new THREE.MeshPhongMaterial({
+        color: 0xb5fff0});
+
+    const purple = new THREE.MeshPhongMaterial({
+        color: 0x3e0c66});
+
+    const ringColor = new THREE.MeshPhongMaterial({
+        color: 0xb89509});
+
     //Textures (implement once on Heroku?)
     const loader = new THREE.TextureLoader();
 
@@ -114,9 +135,11 @@ const SnowBuddy = () => {
 
     const winterSweater2 = new THREE.MeshBasicMaterial({map: loader.load("./Textures/winterSweater2.jpg")});
 
+    const iceCreamCone = new THREE.MeshBasicMaterial({map: loader.load("./Textures/iceCreamCone.jpg")});
+
 
     const materials = [birthdayHatTexture, HatTexture, blueDots, bananaShirt,
-        cowShirt, hawaiianShirt, winterSweater1, winterSweater2];
+        cowShirt, hawaiianShirt, winterSweater1, winterSweater2, iceCreamCone];
 
 
 
@@ -143,6 +166,42 @@ const SnowBuddy = () => {
     carrotNose.rotateX(90);
 
 
+    // 2) Clown Nose
+    const clownNose = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.12, 8, 8), redColor);
+    clownNose.translateZ(1);
+    clownNose.translateY(-.1);
+    clownNose.translateX(8);
+
+    // 3) Ice Cream Nose
+    const iceCreamNose = new THREE.Mesh(new THREE.ConeBufferGeometry(
+        0.12, 0.16, 7), icicleColor);
+    iceCreamNose.translateZ(1);
+    iceCreamNose.translateY(-0.1);
+    iceCreamNose.rotateX(90);
+    iceCreamNose.translateX(8);
+
+    // 4) Knot Nose
+    const knotNose = new THREE.Mesh(new THREE.TorusKnotBufferGeometry(
+        0.07, 0.015, 64, 8), purple);
+    knotNose.translateZ(1);
+    knotNose.translateY(-.1);
+    knotNose.translateX(8);
+
+    // 5) Button Nose
+    const buttonNose = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.08, 8, 8), hatColor);
+    buttonNose.translateZ(1);
+    buttonNose.translateY(-.1);
+    buttonNose.translateX(8);
+
+    noseArray[0] = carrotNose;
+    noseArray[1] = clownNose;
+    noseArray[2] = buttonNose;
+    noseArray[3] = knotNose;
+    noseArray[4] = iceCreamNose;
+
+
 
     //Eyes:
 
@@ -160,6 +219,7 @@ const SnowBuddy = () => {
     //buttonEyes.translateY(0.5);
     buttonEyes.translateZ(1.5);
     //buttonEyes.translateX(8);
+
 
     // 2) Glasses
     var leftGlass = new THREE.Mesh(new THREE.CylinderBufferGeometry(0.15, 0.15, 0.01), hatColor);
@@ -190,10 +250,102 @@ const SnowBuddy = () => {
     torusEyes.translateX(.3);
     torusEyes.translateX(8);
 
+
+    // 4) Heart Eyes
+    const heartShape = new THREE.Shape();
+
+    const x = -.03;
+    const y = -.055;
+    heartShape.moveTo(x + .03, y + .03);
+    heartShape.bezierCurveTo(x + .03, y + .03, x + .025, y, x, y);
+    heartShape.bezierCurveTo(x - .035, y, x - .035, y + .04, x - .035, y + .04);
+    heartShape.bezierCurveTo(x - .035, y + .06, x - .02, y + .082, x + .03, y + .1);
+    heartShape.bezierCurveTo(x + .065, y + .082, x + .085, y + .05, x + .085, y + .04);
+    heartShape.bezierCurveTo(x + .085, y + .04, x + .085, y, x + .055, y);
+    heartShape.bezierCurveTo(x + .04, y, x + .03, y + .03, x + .03, y + .03);
+
+    const leftHeart = new THREE.Mesh(new THREE.ShapeBufferGeometry(heartShape), redColor);
+    leftHeart.translateX(-.15)
+    leftHeart.rotateZ(135);
+
+    const rightHeart = new THREE.Mesh(new THREE.ShapeBufferGeometry(heartShape), redColor);
+    rightHeart.translateX(.15)
+    rightHeart.rotateZ(135);
+
+    const heartEyes = new THREE.Group();
+    heartEyes.add(leftHeart);
+    heartEyes.add(rightHeart);
+
+    heartEyes.translateZ(1.5);
+    heartEyes.scale.y = 2;
+    heartEyes.scale.x = 2;
+    heartEyes.translateX(8);
+
+
+    // 5) Gold Ring Eyes
+
+    const leftRing = new THREE.Mesh(new THREE.TorusBufferGeometry(0.08, 0.03, 8, 24), ringColor);
+    leftRing.translateX(-0.6);
+
+    const rightRing = new THREE.Mesh(new THREE.TorusBufferGeometry(0.08, 0.03, 8, 24), ringColor);
+
+    const ringEyes = new THREE.Group();
+    ringEyes.add(leftRing);
+    ringEyes.add(rightRing);
+    ringEyes.translateZ(1.5);
+    ringEyes.translateX(.3);
+    ringEyes.translateX(8);
+
+
     eyeArray[0] = buttonEyes;
     eyeArray[1] = sunGlasses;
     eyeArray[2] = torusEyes;
+    eyeArray[3] = heartEyes;
+    eyeArray[4] = ringEyes;
 
+
+    //Mouth
+    // 1) Button Sphere Mouth
+    const sphere1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere1.translateZ(1.5);
+    sphere1.translateY(-0.45);
+
+    const sphere2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere2.translateZ(2.59);
+    sphere2.translateX(0.15)
+    sphere2.translateY(-0.45);
+
+    const sphere3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere3.translateZ(2.59);
+    sphere3.translateX(-0.15)
+    sphere3.translateY(-0.45);
+
+
+    const sphere4 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere4.translateZ(4.5);
+    sphere4.translateX(0.25);
+    sphere4.translateY(-0.45);
+
+
+    const sphere5 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere5.translateZ(4.5);
+    sphere5.translateX(-0.25)
+    sphere5.translateY(-0.45);
+
+    const mouthGroup = new THREE.Group();
+    mouthGroup.add(sphere1);
+    mouthGroup.add(sphere2);
+    mouthGroup.add(sphere3);
+    mouthGroup.add(sphere4);
+    mouthGroup.add(sphere5);
+    mouthGroup.translateY(0.05)
+
+    mouthArray[0] = mouthGroup;
 
     //Hats
 
@@ -281,21 +433,49 @@ const SnowBuddy = () => {
 
 
 
+    //SCARF
+    // 1) Flying Scarf
+    const neckPart = new THREE.Mesh(new CylinderBufferGeometry(0.65, 0.65, 0.15), redColor);
+    neckPart.translateY(-0.55);
+
+    const materialCloth = new THREE.MeshBasicMaterial({color: 0xdc472c, side: THREE.DoubleSide});
+
+    const clothFlowingPart = new THREE.Mesh(new PlaneGeometry(0.3, 2), materialCloth);
+    clothFlowingPart.translateX(-1);
+    clothFlowingPart.translateY(-0.3);
+    clothFlowingPart.rotation.x = Math.PI/ 4;
+    clothFlowingPart.rotation.z = 180;
+
+    const scarf = new THREE.Group();
+    scarf.add(neckPart);
+    scarf.add(clothFlowingPart);
+    
+
     //Group head
     const headGroup = new THREE.Group();
     headGroup.add(headBall);
     //NOSE
     headGroup.add(carrotNose);
+    headGroup.add(clownNose);
+    headGroup.add(buttonNose);
+    headGroup.add(knotNose);
+    headGroup.add(iceCreamNose);
     //EYES
     headGroup.add(buttonEyes);
     headGroup.add(sunGlasses);
     headGroup.add(torusEyes);
+    headGroup.add(heartEyes);
+    headGroup.add(ringEyes);
     //HATS
     headGroup.add(topHat);
     headGroup.add(birthdayHat);
     headGroup.add(sombreroHat);
     headGroup.add(snowHatGroup);
     headGroup.add(graduationCapGroup);
+    //MOUTH
+    headGroup.add(mouthGroup);
+    //SCARF
+    headGroup.add(scarf);
 
 
 
@@ -324,6 +504,18 @@ const SnowBuddy = () => {
     if(previousEye) {
         previousEye.addEventListener("click", () => displayPrevious(eyeArray, eyeIndex, "eye"));
         console.log(hatArray.length);
+    }
+
+    //nose
+    const nextNose = document.getElementById('nextNose')
+    if(nextNose) {
+        nextNose.addEventListener("click", () => displayNext(noseArray, noseIndex, "nose"));
+        console.log(noseArray.length);
+    }
+
+    const previousNose = document.getElementById('previousNose')
+    if(previousNose) {
+        previousNose.addEventListener("click", () => displayPrevious(noseArray, noseIndex, "nose"));
     }
 
 
@@ -517,6 +709,8 @@ const main = () => {
 
     hatIndex = 0;
     eyeIndex = 0;
+    noseIndex = 0;
+    mouthIndex = 0;
 
     //RENDER
     var drawScene = () => {
