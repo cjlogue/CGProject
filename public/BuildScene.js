@@ -153,6 +153,9 @@ const SnowBuddy = () => {
     const headBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.7, 30, 8), snowColor);
 
+    baseBall.castShadow = true;
+    middleBall.castShadow = true;
+    headBall.castShadow = true;
 
 
     //Noses:
@@ -356,6 +359,10 @@ const SnowBuddy = () => {
     var band = new THREE.Mesh(new THREE.CylinderBufferGeometry(0.52, 0.52, 0.3), redColor);
     band.translateY(-0.3);
 
+    crown.castShadow = true;
+    brim.castShadow = true;
+    band.castShadow = true;
+
     var topHat = new THREE.Group();
     topHat.add(crown);
     topHat.add(brim);
@@ -371,6 +378,9 @@ const SnowBuddy = () => {
         0.12, 8, 8), birthdayPuff);
     puffBall.translateY(0.45);
 
+    coneHat.castShadow = true;
+    puffBall.castShadow = true;
+
     var birthdayHat = new THREE.Group();
     birthdayHat.add(coneHat);
     birthdayHat.add(puffBall);
@@ -383,6 +393,9 @@ const SnowBuddy = () => {
     sombrero.translateY(0.8);
     var sombreroBrim = new THREE.Mesh(new THREE.CylinderBufferGeometry(1.5, 1.5, 0.1), sombreroColor);
     sombreroBrim.translateY(0.5);
+
+    sombrero.castShadow = true;
+    sombreroBrim.castShadow = true;
 
     const sombreroHat = new THREE.Group();
     sombreroHat.add(sombrero);
@@ -404,6 +417,11 @@ const SnowBuddy = () => {
         0.15, 8, 8), snowHatDetail);
     pomPom.translateY(1.25);
 
+    snowHat.castShadow = true;
+    roundHatTop.castShadow = true;
+    snowHatFold.castShadow = true;
+    pomPom.castShadow = true;
+
     const snowHatGroup = new THREE.Group();
     snowHatGroup.add(snowHat);
     snowHatGroup.add(snowHatFold);
@@ -419,6 +437,9 @@ const SnowBuddy = () => {
     var graduationBrim = new THREE.Mesh(new BoxBufferGeometry(1.6, 0.1, 1.6), hatColor);
     graduationBrim.translateY(0.9);
     graduationBrim.rotateY(90);
+
+    graduationCap.castShadow = true;
+    graduationBrim.castShadow = true;
 
     const graduationCapGroup = new THREE.Group();
     graduationCapGroup.add(graduationCap);
@@ -445,6 +466,9 @@ const SnowBuddy = () => {
     clothFlowingPart.translateY(-0.3);
     clothFlowingPart.rotation.x = Math.PI/ 4;
     clothFlowingPart.rotation.z = 180;
+
+    neckPart.castShadow = true;
+    clothFlowingPart.castShadow = true;
 
     const scarf = new THREE.Group();
     scarf.add(neckPart);
@@ -554,6 +578,8 @@ const SnowBuddy = () => {
     leftFinger1.translateX(-1.4);
     leftFinger1.translateY(0.8);
 
+    leftStick.castShadow = true;
+    leftFinger1.castShadow = true;
 
     // Left Arm Group
     const leftArm = new THREE.Group();
@@ -571,8 +597,10 @@ const SnowBuddy = () => {
     rightFinger1.translateX(1.6);
     rightFinger1.translateY(0.5);
 
+    rightStick.castShadow = true;
+    rightFinger1.castShadow = true;
 
-    // Left Arm Group
+    // Right Arm Group
     const rightArm = new THREE.Group();
     rightArm.add(rightStick);
     rightArm.add(rightFinger1);
@@ -611,16 +639,22 @@ const createFloor = () => {
     const snowColor = new THREE.MeshPhongMaterial({
         color: 0xf0fffc});
 
+
+
     const planeGeo = new THREE.PlaneGeometry(15, 30, 0.5, 0.5);
-    const plane = new THREE.Mesh(planeGeo, new THREE.MeshBasicMaterial({
-        color: snowColor,
-    }));
+    const planeMat = new THREE.MeshPhongMaterial({color: snowColor, side: THREE.DoubleSide});
+    const plane = new THREE.Mesh(planeGeo, planeMat);
+
+    plane.receiveShadow = true;
     //plane.rotation.x -= Math.PI * .5;
     plane.translateY(-1);
     plane.translateZ(-5);
     plane.rotateX(30);
 
+
     scene.add(plane);
+
+
 
     const pineColor = new THREE.MeshPhongMaterial({
         color: 0x2c713d});
@@ -641,6 +675,11 @@ const createFloor = () => {
         0.1, 0.1, 1), stickColor);
     pineTrunk.translateY(-0.6);
 
+    pineTop.castShadow = true;
+    pineMiddle.castShadow = true;
+    pineBottom.castShadow = true;
+    pineTrunk.castShadow = true;
+
     const pineTree = new THREE.Group();
     pineTree.add(pineTop);
     pineTree.add(pineMiddle);
@@ -649,8 +688,9 @@ const createFloor = () => {
 
 
     scene.add(pineTree);
-    pineTree.translateZ(-1.9);
+    pineTree.translateZ(-1.5);
     pineTree.translateX(-4);
+    pineTree.translateY(-.4)
 
 
 }
@@ -661,9 +701,8 @@ function createLighting() {
 
 
     const color = 0xFFFFFF;
-    const intensity = 1;
     let directionalLight;
-    directionalLight = new THREE.DirectionalLight(color, intensity);
+    directionalLight = new THREE.DirectionalLight(color, .75);
     directionalLight.position.set(-1, 2, 4);
 
     const ambLight = new THREE.AmbientLight(0x474747);
@@ -671,6 +710,17 @@ function createLighting() {
     scene.add(directionalLight);
     scene.add(ambLight);
 
+    const spotLight = new THREE.SpotLight(color, .5);
+    spotLight.position.set(-15, 20, 10);
+    spotLight.target.position.set(0, 0, 0);
+    spotLight.castShadow = true;
+
+    scene.add(spotLight);
+    scene.add(spotLight.target);
+
+    const cameraHelper = new THREE.CameraHelper
+    (spotLight.shadow.camera);
+    scene.add(cameraHelper);
 
 
 }
@@ -683,6 +733,7 @@ const main = () => {
     // clock = new THREE.Clock(true);
 
     // RENDERER
+
     const canvas = document.getElementById("canvas");
     //document.querySelector('#canvas');   //////// is this how you get canvas?
     const renderer = new THREE.WebGLRenderer({
@@ -712,8 +763,12 @@ const main = () => {
     noseIndex = 0;
     mouthIndex = 0;
 
+
     //RENDER
     var drawScene = () => {
+
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         renderer.render(scene, camera);
         requestAnimationFrame(drawScene)
