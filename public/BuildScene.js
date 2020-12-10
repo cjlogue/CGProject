@@ -34,6 +34,9 @@ const displayNext =  (itemArray, itemIdx, key) => {
     else if (key === "shirt") {
         shirtIndex = itemIdx + 1;
     }
+    else if (key === "scarf") {
+        scarfIndex = itemIdx + 1;
+    }
 
 }
 
@@ -71,6 +74,9 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     else if (key === "shirt") {
         shirtIndex = itemIdx - 1;
     }
+    else if (key === "scarf") {
+    scarfIndex = itemIdx - 1;
+}
 
 }
 
@@ -80,12 +86,15 @@ var eyeIndex;
 var noseIndex;
 var mouthIndex;
 var shirtIndex;
+var scarfIndex;
 
 var hatArray = [];
 var eyeArray = [];
 var noseArray = [];
 var mouthArray = [];
 var shirtArray = [];
+var scarfArray = [];
+
 
 // Create all elements of the Snow Buddy
 const SnowBuddy = () => {
@@ -609,6 +618,8 @@ const SnowBuddy = () => {
     const scarf = new THREE.Group();
     scarf.add(neckPart);
     scarf.add(clothFlowingPart);
+
+    scarfArray[0] = scarf;
     
 
     //Group head
@@ -700,6 +711,17 @@ const SnowBuddy = () => {
     const previousShirt = document.getElementById('previousShirt')
     if(previousShirt) {
         previousShirt.addEventListener("click", () => displayPrevious(shirtArray, shirtIndex, "shirt"));
+    }
+
+    //scarf
+    const nextScarf = document.getElementById('nextScarf')
+    if(nextScarf) {
+        nextScarf.addEventListener("click", () => displayNext(scarfArray, scarfIndex, "scarf"));
+    }
+
+    const previousScarf = document.getElementById('previousScarf')
+    if(previousScarf) {
+        previousScarf.addEventListener("click", () => displayPrevious(scarfArray, scarfIndex, "scarf"));
     }
 
 
@@ -927,6 +949,7 @@ const main = () => {
     noseIndex = 0;
     mouthIndex = 0;
     shirtIndex = 0;
+    scarfIndex = 0;
 
 
     //RENDER
