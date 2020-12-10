@@ -28,6 +28,9 @@ const displayNext =  (itemArray, itemIdx, key) => {
     else if (key === "nose") {
         noseIndex = itemIdx + 1;
     }
+    else if (key === "mouth") {
+        mouthIndex = itemIdx + 1;
+    }
 
 }
 
@@ -58,6 +61,9 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     }
     else if (key === "nose") {
         noseIndex = itemIdx - 1;
+    }
+    else if (key === "mouth") {
+        mouthIndex = itemIdx - 1;
     }
 
 }
@@ -348,7 +354,68 @@ const SnowBuddy = () => {
     mouthGroup.add(sphere5);
     mouthGroup.translateY(0.05)
 
+    //2) Blushing Mouth:
+    const sphere6 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere6.translateZ(1.5);
+    sphere6.translateY(-0.45);
+
+    const sphere7 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere7.translateZ(2.59);
+    sphere7.translateX(0.15)
+    sphere7.translateY(-0.45);
+
+    const sphere8 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.05, 4, 4), hatColor);
+    sphere8.translateZ(2.59);
+    sphere8.translateX(-0.15)
+    sphere8.translateY(-0.45);
+
+
+    const bigSphere1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.07, 4, 4), redColor);
+    bigSphere1.translateZ(4.5);
+    bigSphere1.translateX(0.25);
+    bigSphere1.translateY(-0.45);
+
+
+    const bigSphere2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.07, 4, 4), redColor);
+    bigSphere2.translateZ(4.5);
+    bigSphere2.translateX(-0.25);
+    bigSphere2.translateY(-0.45);
+
+    const blushingMouthGroup = new THREE.Group();
+    blushingMouthGroup.add(sphere6);
+    blushingMouthGroup.add(sphere7);
+    blushingMouthGroup.add(sphere8);
+    blushingMouthGroup.add(bigSphere1);
+    blushingMouthGroup.add(bigSphere2);
+    blushingMouthGroup.translateY(0.05);
+    blushingMouthGroup.translateX(8);
+
+    //3) Shock-Sphere Mouth
+    const halfMouth = new THREE.Mesh(new THREE.SphereBufferGeometry(0.12,
+        10, 10), hatColor);
+    halfMouth.rotateZ(-50);
+
+    const secondHalfMouth = new THREE.Mesh(new THREE.SphereBufferGeometry(0.06,
+        10, 10), sombreroColor);
+    secondHalfMouth.translateY(-0.15);
+    secondHalfMouth.translateZ(3.5);
+    //secondHalfMouth.rotateZ(-50);
+
+    const shockSphere = new THREE.Group();
+    shockSphere.add(halfMouth);
+    shockSphere.add(secondHalfMouth);
+    shockSphere.translateY(-0.45);
+    shockSphere.translateZ(4.5);
+    shockSphere.translateX(8);
+
     mouthArray[0] = mouthGroup;
+    mouthArray[1] = blushingMouthGroup;
+    mouthArray[2] = shockSphere;
 
     //Hats
 
@@ -373,7 +440,7 @@ const SnowBuddy = () => {
 
     // 2) Birthday Hat
     var coneHat = new THREE.Mesh(new THREE.ConeBufferGeometry(
-        0.5, 0.9, 15), birthdayHatColor);
+        0.5, 0.9, 15), birthdayHatTexture);
     var puffBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.12, 8, 8), birthdayPuff);
     puffBall.translateY(0.45);
@@ -446,11 +513,13 @@ const SnowBuddy = () => {
     graduationCapGroup.add(graduationBrim);
     graduationCapGroup.translateX(8);
 
+
     hatArray[0] = topHat;
     hatArray[1] = birthdayHat;
     hatArray[2] = sombreroHat;
     hatArray[3] = snowHatGroup;
     hatArray[4] = graduationCapGroup;
+
 
 
 
@@ -498,6 +567,8 @@ const SnowBuddy = () => {
     headGroup.add(graduationCapGroup);
     //MOUTH
     headGroup.add(mouthGroup);
+    headGroup.add(blushingMouthGroup);
+    headGroup.add(shockSphere);
     //SCARF
     headGroup.add(scarf);
 
@@ -542,6 +613,16 @@ const SnowBuddy = () => {
         previousNose.addEventListener("click", () => displayPrevious(noseArray, noseIndex, "nose"));
     }
 
+    //mouth
+    const nextMouth = document.getElementById('nextMouth')
+    if(nextMouth) {
+        nextMouth.addEventListener("click", () => displayNext(mouthArray, mouthIndex, "mouth"));
+    }
+
+    const previousMouth = document.getElementById('previousMouth')
+    if(previousMouth) {
+        previousMouth.addEventListener("click", () => displayNext(mouthArray, mouthIndex, "mouth"));
+    }
 
 
 
