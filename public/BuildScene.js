@@ -31,6 +31,9 @@ const displayNext =  (itemArray, itemIdx, key) => {
     else if (key === "mouth") {
         mouthIndex = itemIdx + 1;
     }
+    else if (key === "shirt") {
+        shirtIndex = itemIdx + 1;
+    }
 
 }
 
@@ -65,6 +68,9 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     else if (key === "mouth") {
         mouthIndex = itemIdx - 1;
     }
+    else if (key === "shirt") {
+        shirtIndex = itemIdx - 1;
+    }
 
 }
 
@@ -73,11 +79,13 @@ var hatIndex;
 var eyeIndex;
 var noseIndex;
 var mouthIndex;
+var shirtIndex;
 
 var hatArray = [];
 var eyeArray = [];
 var noseArray = [];
 var mouthArray = [];
+var shirtArray = [];
 
 // Create all elements of the Snow Buddy
 const SnowBuddy = () => {
@@ -143,9 +151,13 @@ const SnowBuddy = () => {
 
     const iceCreamCone = new THREE.MeshBasicMaterial({map: loader.load("./Textures/iceCreamCone.jpg")});
 
+    const DownCoatMaterial = new THREE.MeshBasicMaterial({map: loader.load("./Textures/DownCoat.png")});
+
+    const Fur = new THREE.MeshBasicMaterial({map: loader.load("./Textures/Fur.jpg")});
+
 
     const materials = [birthdayHatTexture, HatTexture, blueDots, bananaShirt,
-        cowShirt, hawaiianShirt, winterSweater1, winterSweater2, iceCreamCone];
+        cowShirt, hawaiianShirt, winterSweater1, winterSweater2, iceCreamCone, DownCoatMaterial, Fur];
 
 
 
@@ -153,15 +165,69 @@ const SnowBuddy = () => {
     const baseBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         1, 30, 8), snowColor);
 
-    const middleBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.85, 30, 8), snowColor);
-
     const headBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.7, 30, 8), snowColor);
 
     baseBall.castShadow = true;
-    middleBall.castShadow = true;
     headBall.castShadow = true;
+
+
+    //Shirts:
+    const middleBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), snowColor);
+    middleBall.castShadow = true;
+
+    const hawaiianBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), hawaiianShirt);
+    hawaiianBall.castShadow = true;
+    hawaiianBall.translateX(8);
+
+    const bananaBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), bananaShirt);
+    bananaBall.castShadow = true;
+    bananaBall.translateX(8);
+
+    const sweater1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), winterSweater1);
+    sweater1.castShadow = true;
+    sweater1.translateX(8);
+
+    const sweater2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), winterSweater2);
+    sweater2.castShadow = true;
+    sweater2.translateX(8);
+
+    const cowBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), cowShirt);
+    cowBall.castShadow = true;
+    cowBall.translateX(8);
+
+    const dotsBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), blueDots);
+    dotsBall.castShadow = true;
+    dotsBall.translateX(8);
+
+    const DownCoat = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), DownCoatMaterial);
+    DownCoat.castShadow = true;
+    DownCoat.translateX(8);
+
+    const FurryBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), Fur);
+    FurryBall.castShadow = true;
+    FurryBall.translateX(8);
+
+
+    shirtArray[0] = middleBall;
+    shirtArray[1] = hawaiianBall;
+    shirtArray[2] = bananaBall;
+    shirtArray[3] = sweater1;
+    shirtArray[4] = sweater2;
+    shirtArray[5] = cowBall;
+    shirtArray[6] = dotsBall;
+    shirtArray[7] = DownCoat;
+    shirtArray[8] = FurryBall;
+
 
 
     //Noses:
@@ -203,6 +269,7 @@ const SnowBuddy = () => {
     buttonNose.translateZ(1);
     buttonNose.translateY(-.1);
     buttonNose.translateX(8);
+
 
     noseArray[0] = carrotNose;
     noseArray[1] = clownNose;
@@ -621,11 +688,19 @@ const SnowBuddy = () => {
 
     const previousMouth = document.getElementById('previousMouth')
     if(previousMouth) {
-        previousMouth.addEventListener("click", () => displayNext(mouthArray, mouthIndex, "mouth"));
+        previousMouth.addEventListener("click", () => displayPrevious(mouthArray, mouthIndex, "mouth"));
     }
 
+    //shirt
+    const nextShirt = document.getElementById('nextShirt')
+    if(nextShirt) {
+        nextShirt.addEventListener("click", () => displayNext(shirtArray, shirtIndex, "shirt"));
+    }
 
-
+    const previousShirt = document.getElementById('previousShirt')
+    if(previousShirt) {
+        previousShirt.addEventListener("click", () => displayPrevious(shirtArray, shirtIndex, "shirt"));
+    }
 
 
 
@@ -691,11 +766,21 @@ const SnowBuddy = () => {
    // Middle Ball Group
     const middleBallGroup = new THREE.Group();
     middleBallGroup.add(middleBall);
+    middleBallGroup.add(hawaiianBall);
+    middleBallGroup.add(bananaBall);
+    middleBallGroup.add(sweater1);
+    middleBallGroup.add(sweater2);
+    middleBallGroup.add(cowBall);
+    middleBallGroup.add(dotsBall);
+    middleBallGroup.add(DownCoat);
+    middleBallGroup.add(FurryBall);
+    //
     middleBallGroup.add(button1);
     middleBallGroup.add(button2);
     middleBallGroup.add(button3);
     middleBallGroup.add(leftArm);
     middleBallGroup.add(rightArm);
+
 
 
 
@@ -736,7 +821,6 @@ const createFloor = () => {
     scene.add(plane);
 
 
-
     const pineColor = new THREE.MeshPhongMaterial({
         color: 0x2c713d});
 
@@ -772,7 +856,6 @@ const createFloor = () => {
     pineTree.translateZ(-1.5);
     pineTree.translateX(-4);
     pineTree.translateY(-.4)
-
 
 }
 
@@ -843,6 +926,7 @@ const main = () => {
     eyeIndex = 0;
     noseIndex = 0;
     mouthIndex = 0;
+    shirtIndex = 0;
 
 
     //RENDER
