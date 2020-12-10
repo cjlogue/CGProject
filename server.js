@@ -6,5 +6,6 @@ app.get("/", function(req, res){
         root: __dirname
     });
 })
+app.use(express.static(__dirname + '/public'));
 
 app.listen(3000)

@@ -433,7 +433,7 @@ const SnowBuddy = () => {
 
     // 2) Birthday Hat
     var coneHat = new THREE.Mesh(new THREE.ConeBufferGeometry(
-        0.5, 0.9, 15), birthdayHatColor);
+        0.5, 0.9, 15), birthdayHatTexture);
     var puffBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.12, 8, 8), birthdayPuff);
     puffBall.translateY(0.45);
@@ -492,11 +492,13 @@ const SnowBuddy = () => {
     graduationCapGroup.add(graduationBrim);
     graduationCapGroup.translateX(8);
 
+
     hatArray[0] = topHat;
     hatArray[1] = birthdayHat;
     hatArray[2] = sombreroHat;
     hatArray[3] = snowHatGroup;
     hatArray[4] = graduationCapGroup;
+
 
 
 
