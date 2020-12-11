@@ -1,6 +1,15 @@
 import * as THREE from './three.module.js';
 import {BoxBufferGeometry, CylinderBufferGeometry, PlaneGeometry} from "./three.module.js";
 
+
+//import {MtlObjBridge} from './three.js-master/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+
+import {OBJLoader2} from './three.js-master/examples/jsm/loaders/OBJLoader2.js';
+
+//import {MTLLoader} from './three.js-master/examples/jsm/loaders/MTLLoader.js';
+
+
+
 const displayNext =  (itemArray, itemIdx, key) => {
 
     for (let i = 0; i < itemArray.length; i++) {
@@ -872,6 +881,16 @@ const createFloor = () => {
     pineTree.add(pineMiddle);
     pineTree.add(pineBottom);
     pineTree.add(pineTrunk);
+
+
+    //North Pole
+    const objLoader = new OBJLoader2();
+    objLoader.load('./Pole.obj', (root) => {
+        scene.add(root);
+            root.translateX(3);
+            root.translateY(-3);
+            root.translateZ(-3);
+    });
 
 
     scene.add(pineTree);
