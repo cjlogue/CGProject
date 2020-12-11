@@ -28,7 +28,7 @@ h2 {
     display: inline-table;
     font-family: "Baloo Bhaijaan";
     color: steelblue;
-    //font-size: xx-large;
+    font-size: xx-large;
 }
 
 a {
@@ -53,4 +53,5 @@ a:hover {
 /*    color: white;*/
 /*    border-radius: 40%;*/
 /*}*/
+
 
