@@ -1,6 +1,18 @@
 import * as THREE from './three.module.js';
 import {BoxBufferGeometry, CylinderBufferGeometry, PlaneGeometry} from "./three.module.js";
 
+<<<<<<< Updated upstream
+=======
+
+import {MtlObjBridge} from './three.js-master/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+
+import {OBJLoader2} from './three.js-master/examples/jsm/loaders/OBJLoader2.js';
+
+import {MTLLoader} from './three.js-master/examples/jsm/loaders/MTLLoader.js';
+
+
+
+>>>>>>> Stashed changes
 const displayNext =  (itemArray, itemIdx, key) => {
 
     for (let i = 0; i < itemArray.length; i++) {
@@ -729,14 +741,43 @@ const createFloor = () => {
     pineTree.add(pineTrunk);
 
 
+<<<<<<< Updated upstream
     scene.add(pineTree);
     pineTree.translateZ(-1.9);
     pineTree.translateX(-4);
 
+=======
+    //North Pole
+    const objLoader = new OBJLoader2();
+    objLoader.load('./Pole.obj', (root) => {
+        scene.add(root);
+            root.translateX(3);
+            root.translateY(-3);
+            root.translateZ(-3);
+    });
+
+
+    /* scene.add(pineTree);
+    pineTree.translateZ(-1.5);
+    pineTree.translateX(-4);
+    pineTree.translateY(-.4) */
+>>>>>>> Stashed changes
 
 }
 
-
+const mtlLoader = new MTLLoader();
+mtlLoader.load('./snowTree.mtl', (mtlParseResult) => {
+    const objLoader = new OBJLoader2();
+    const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+    objLoader.addMaterials(materials);
+    objLoader.load('./snowTree.obj', (root) => {
+        scene.add(root);
+        root.translateX(-4.5);
+        root.translateY(-2.9);
+        root.translateZ(-3);
+        root.rotateY(200);
+    });
+});
 
 function createLighting() {
 
