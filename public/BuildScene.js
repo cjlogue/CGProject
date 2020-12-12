@@ -898,7 +898,9 @@ const createFloor = () => {
     pineTree.translateX(-4);
     pineTree.translateY(-.4)
 
+
 }
+
 
 
 
@@ -923,19 +925,16 @@ function createLighting() {
     scene.add(spotLight);
     scene.add(spotLight.target);
 
-    const cameraHelper = new THREE.CameraHelper
-    (spotLight.shadow.camera);
-    scene.add(cameraHelper);
-
 
 }
+
 
 
 let scene;
 const main = () => {
 
     // // CLOCK for timing functions
-    // clock = new THREE.Clock(true);
+    //clock = new THREE.Clock(true);
 
     // RENDERER
 
@@ -982,6 +981,155 @@ const main = () => {
     }
 
     requestAnimationFrame(drawScene)
+
+    // Bouncing Snow Friend
+
+    const friendColor = new THREE.MeshPhongMaterial({
+                                                        color: 0xf0fffc});
+    const snowFriendGeo = new THREE.SphereBufferGeometry(0.7, 30, 8);
+    const snowFriendMat = new THREE.MeshPhongMaterial({color: friendColor});
+    const snowFriendMesh = new THREE.Mesh(snowFriendGeo, snowFriendMat);
+    snowFriendMesh.castShadow = true;
+    snowFriendMesh.translateX(4);
+    console.log(snowFriendMesh.position.x);
+    console.log(snowFriendMesh.position.y);
+    console.log(snowFriendMesh.position.z);
+
+    // Snow Friend Arms
+
+    const stickColor = new THREE.MeshPhongMaterial({
+                                                       color: 0x73410c});
+
+    const leftArmFriend = new THREE.Mesh(new THREE.CylinderBufferGeometry(
+        0.03, 0.02, 0.6), stickColor);
+
+    leftArmFriend.castShadow = true;
+    leftArmFriend.translateX(3.1);
+    leftArmFriend.rotateZ(130);
+
+    const rightArmFriend = new THREE.Mesh(new THREE.CylinderBufferGeometry(
+        0.02, 0.03, 0.6), stickColor);
+
+    rightArmFriend.castShadow = true;
+    rightArmFriend.translateX(4.9);
+    rightArmFriend.translateY(.2);
+    rightArmFriend.rotateZ(-45);
+
+    // Snow Friend Nose
+
+    const carrotColor = new THREE.MeshPhongMaterial({
+                                                        color: 0xda841c});
+    const carrotNose = new THREE.Mesh(new THREE.ConeBufferGeometry(0.12, 0.16, 7), carrotColor);
+    carrotNose.translateZ(2.5);
+    // carrotNose.translateY(-0.1);
+    carrotNose.rotateX(114.8);
+    carrotNose.translateX(3.4);
+    carrotNose.scale.x = .8;
+    carrotNose.scale.y = .8;
+    carrotNose.scale.z = .8;
+
+    // Snow Friend Eyes
+
+    const hatColor = new THREE.MeshPhongMaterial({
+                                                     color: 0x5c504b});
+    const leftEye = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.08, 8, 8), hatColor);
+    leftEye.translateX(-0.2);
+    const rightEye = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.08, 8, 8), hatColor);
+    rightEye.translateX(0.2);
+
+    const buttonEyes = new THREE.Group();
+    buttonEyes.add(leftEye);
+    buttonEyes.add(rightEye);
+    buttonEyes.translateZ(2);
+    buttonEyes.translateX(3.5);
+    buttonEyes.translateY(.2);
+
+    // Snow Friend Mouth
+
+    const mouth1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.06, 8, 8), hatColor);
+    mouth1.translateX(-0.2);
+    const mouth2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.04, 8, 8), hatColor);
+    mouth2.translateX(-0.1);
+    mouth2.translateY(-.04);
+    const mouth3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.04, 8, 8), hatColor);
+    mouth3.translateY(-0.07);
+    const mouth4 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.04, 8, 8), hatColor);
+    mouth4.translateX(0.1);
+    mouth4.translateY(-.04);
+    const mouth5 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.06, 8, 8), hatColor);
+    mouth5.translateX(0.2);
+
+    const buttonMouth = new THREE.Group();
+    buttonMouth.add(mouth1);
+    buttonMouth.add(mouth2);
+    buttonMouth.add(mouth3);
+    buttonMouth.add(mouth4);
+    buttonMouth.add(mouth5);
+    buttonMouth.translateZ(2.5);
+    buttonMouth.translateX(3.4);
+    buttonMouth.translateY(-.15);
+
+    // Snow Friend Hat
+
+    const greenColor = new THREE.MeshPhongMaterial({
+                                                      color: 0x2c713d});
+    const redColor = new THREE.MeshPhongMaterial({
+                                                     color: 0xdc472c});
+    var crown = new THREE.Mesh(new THREE.CylinderBufferGeometry(0.5, 0.5, 0.7), redColor);
+    var brim = new THREE.Mesh(new THREE.CylinderBufferGeometry(0.7, 0.7, 0.1), redColor);
+    brim.translateY(-0.4);
+    var band = new THREE.Mesh(new THREE.CylinderBufferGeometry(0.52, 0.52, 0.3), greenColor);
+    band.translateY(-0.3);
+
+    crown.castShadow = true;
+    brim.castShadow = true;
+    band.castShadow = true;
+
+    var topHat = new THREE.Group();
+    topHat.add(crown);
+    topHat.add(brim);
+    topHat.add(band);
+    topHat.translateY(.9);
+    topHat.translateX(4);
+    topHat.rotateX(-.1);
+    topHat.scale.x = .7;
+    topHat.scale.y = .7;
+    topHat.scale.z = .7;
+
+    // Snow Friend Group
+    const snowFriend = new THREE.Group();
+    snowFriend.add(snowFriendMesh);
+    snowFriend.add(carrotNose);
+    snowFriend.add(buttonEyes);
+    snowFriend.add(buttonMouth);
+    snowFriend.add(topHat);
+    snowFriend.add(rightArmFriend);
+    snowFriend.add(leftArmFriend);
+    scene.add(snowFriend);
+
+    //RENDER Bounce
+    var clock = new THREE.Clock();
+    var time = 0;
+    var delta = 0;
+
+    renderBounce();
+
+    function renderBounce() {
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        requestAnimationFrame(renderBounce);
+        delta = clock.getDelta();
+        time += delta;
+        snowFriend.position.y = -1.2 + Math.abs(Math.sin(time * 3)) * 2;
+        renderer.render(scene, camera);
+    }
 }
 
 // START
