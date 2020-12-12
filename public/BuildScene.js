@@ -14,13 +14,6 @@ const displayNext =  (itemArray, itemIdx, key) => {
 
     for (let i = 0; i < itemArray.length; i++) {
 
-        //How to wrap back around to front of list?
-        // if (hatArray.length + 1 === hatIdx + 1) {
-        //     i = 0;
-        // }
-        if (itemArray.length === itemIdx + 1) {
-            break;
-        }
         if (i === itemIdx) {
             itemArray[i].translateX(8);
         }
@@ -28,23 +21,55 @@ const displayNext =  (itemArray, itemIdx, key) => {
             itemArray[i].translateX(-8);
         }
     }
-    if (key === "hat") {
-        hatIndex = itemIdx + 1;
-    }
-    else if (key === "eye") {
-        eyeIndex = itemIdx + 1;
-    }
-    else if (key === "nose") {
-        noseIndex = itemIdx + 1;
-    }
-    else if (key === "mouth") {
-        mouthIndex = itemIdx + 1;
-    }
-    else if (key === "shirt") {
-        shirtIndex = itemIdx + 1;
-    }
-    else if (key === "scarf") {
-        scarfIndex = itemIdx + 1;
+    switch(key) {
+        case "hat":
+            if (itemIdx === hatArray.length -1) {
+                hatIndex = -1;
+                console.log("hatIndex =" + hatIndex)
+            }
+            else {
+                hatIndex = itemIdx + 1;
+            }
+            break;
+        case "eye":
+            if (itemIdx === eyeArray.length) {
+                eyeIndex = -1;
+            }
+            else {
+                eyeIndex = itemIdx + 1;
+            }
+            break;
+        case "nose":
+            if (itemIdx === noseArray.length -1) {
+                noseIndex = -1;
+            }
+            else {
+                noseIndex = itemIdx + 1;
+            }
+            break;
+        case "mouth":
+            if (itemIdx === mouthArray.length -1) {
+                mouthIndex = -1;
+            }
+            else {
+                mouthIndex = itemIdx + 1;
+            }
+            break;
+        case "shirt":
+            if (itemIdx === shirtArray.length -1) {
+                shirtIndex = -1;
+            }
+            else {
+                shirtIndex = itemIdx + 1;
+            }
+            break;
+        default:
+            if (itemIdx === scarfArray.length -1) {
+                scarfIndex = -1;
+            }
+            else {
+                scarfIndex = itemIdx + 1;
+            }
     }
 
 }
@@ -54,13 +79,6 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
 
     for (let i = 0; i < itemArray.length; i++) {
 
-        //How to wrap back around to front of list?
-        // if (hatArray.length + 1 === hatIdx + 1) {
-        //     i = 0;
-        // }
-        if (-1 === itemIdx - 1) {
-            break;
-        }
         if (i === itemIdx) {
             itemArray[i].translateX(8);
         }
@@ -68,24 +86,55 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             itemArray[i].translateX(-8);
         }
     }
-    if (key === "hat") {
-        hatIndex = itemIdx - 1;
+    switch(key) {
+        case "hat":
+            if (itemIdx === 0) {
+                hatIndex = hatArray.length;
+            }
+            else {
+                hatIndex = itemIdx - 1;
+            }
+            break;
+        case "eye":
+            if (itemIdx === 0) {
+                eyeIndex = eyeArray.length;
+            }
+            else {
+                eyeIndex = itemIdx - 1;
+            }
+            break;
+        case "nose":
+            if (itemIdx === 0) {
+                noseIndex = noseArray.length;
+            }
+            else {
+                noseIndex = itemIdx - 1;
+            }
+            break;
+        case "mouth":
+            if (itemIdx === 0) {
+                mouthIndex = mouthArray.length;
+            }
+            else {
+                mouthIndex = itemIdx - 1;
+            }
+            break;
+        case "shirt":
+            if (itemIdx === 0) {
+                mouthIndex = mouthArray.length;
+            }
+            else {
+                mouthIndex = itemIdx - 1;
+            }
+            break;
+        default:
+            if (itemIdx === 0) {
+                scarfIndex = scarfArray.length;
+            }
+            else {
+                scarfIndex = itemIdx - 1;
+            }
     }
-    else if (key === "eye") {
-        eyeIndex = itemIdx - 1;
-    }
-    else if (key === "nose") {
-        noseIndex = itemIdx - 1;
-    }
-    else if (key === "mouth") {
-        mouthIndex = itemIdx - 1;
-    }
-    else if (key === "shirt") {
-        shirtIndex = itemIdx - 1;
-    }
-    else if (key === "scarf") {
-    scarfIndex = itemIdx - 1;
-}
 
 }
 
