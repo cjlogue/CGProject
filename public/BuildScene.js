@@ -2,11 +2,14 @@ import * as THREE from './three.module.js';
 import {BoxBufferGeometry, CylinderBufferGeometry, PlaneGeometry} from "./three.module.js";
 
 
-//import {MtlObjBridge} from './three.js-master/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+
+import {MtlObjBridge} from './three.js-master/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
 
 import {OBJLoader2} from './three.js-master/examples/jsm/loaders/OBJLoader2.js';
 
-//import {MTLLoader} from './three.js-master/examples/jsm/loaders/MTLLoader.js';
+import {MTLLoader} from './three.js-master/examples/jsm/loaders/MTLLoader.js';
+
+
 
 
 
@@ -137,8 +140,6 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     }
 
 }
-
-
 var hatIndex;
 var eyeIndex;
 var noseIndex;
@@ -932,23 +933,58 @@ const createFloor = () => {
     pineTree.add(pineTrunk);
 
 
+
+    /* scene.add(pineTree);
+    pineTree.translateZ(-1.9);
+    pineTree.translateX(-4); */
+
+
     //North Pole
-    const objLoader = new OBJLoader2();
+    /* const objLoader = new OBJLoader2();
     objLoader.load('./Pole.obj', (root) => {
         scene.add(root);
             root.translateX(3);
             root.translateY(-3);
             root.translateZ(-3);
     });
+ */
+    const mtlLoader = new MTLLoader();
+mtlLoader.load('./Pole.mtl', (mtlParseResult) => {
+    const objLoader = new OBJLoader2();
+    const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+    objLoader.addMaterials(materials);
+    objLoader.load('./Pole.obj', (root) => {
+        scene.add(root);
+        root.translateX(3);
+        root.translateY(-3);
+        root.translateZ(-3);
+        root.scale.x = 0.8;
+        root.scale.y = 0.9;
+    });
+});
 
-
+mtlLoader.load('./snowTree.mtl', (mtlParseResult) => {
+    const objLoader = new OBJLoader2();
+    const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+    objLoader.addMaterials(materials);
+    objLoader.load('./snowTree.obj', (root) => {
+        scene.add(root);
+        root.translateX(-4);
+        root.translateY(-3);
+        root.translateZ(-3);
+        root.rotateY(200);
+    });
+});
+    
+   /*
     scene.add(pineTree);
     pineTree.translateZ(-1.5);
     pineTree.translateX(-4);
-    pineTree.translateY(-.4)
+    pineTree.translateY(-.4) */
 
 
 }
+
 
 
 
