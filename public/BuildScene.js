@@ -198,6 +198,15 @@ const SnowBuddy = () => {
     const ringColor = new THREE.MeshPhongMaterial({
         color: 0xb89509});
 
+    const yellowOrange = new THREE.MeshPhongMaterial({
+        color: 0xf5bc42});
+
+    const dustyPink = new THREE.MeshPhongMaterial({
+        color: 0xcf97bc});
+
+    const dustyPink2 = new THREE.MeshPhongMaterial({
+        color: 0xbf7ca9});
+
     //Textures (implement once on Heroku?)
     const loader = new THREE.TextureLoader();
 
@@ -217,16 +226,19 @@ const SnowBuddy = () => {
 
     const winterSweater2 = new THREE.MeshBasicMaterial({map: loader.load("./Textures/winterSweater2.jpg")});
 
-    const iceCreamCone = new THREE.MeshBasicMaterial({map: loader.load("./Textures/iceCreamCone.jpg")});
-
     const DownCoatMaterial = new THREE.MeshBasicMaterial({map: loader.load("./Textures/DownCoat.png")});
 
     const Fur = new THREE.MeshBasicMaterial({map: loader.load("./Textures/Fur.jpg")});
 
+    const Stripes = new THREE.MeshBasicMaterial({map: loader.load("./Textures/Stripes.jpg")});
 
-    const materials = [birthdayHatTexture, HatTexture, blueDots, bananaShirt,
-        cowShirt, hawaiianShirt, winterSweater1, winterSweater2, iceCreamCone, DownCoatMaterial, Fur];
+    const xmas3 = new THREE.MeshBasicMaterial({map: loader.load("./Textures/xmas3.jpg")});
 
+    const xmas1 = new THREE.MeshBasicMaterial({map: loader.load("./Textures/xmas1.jpg")});
+
+
+    // const bikini = new THREE.MeshBasicMaterial({map: loader.load("./Textures/bikini.jpg")});
+    // bikini.rotation = THREE.MathUtils.degToRad(90);
 
 
     //Snowball Parts
@@ -285,6 +297,16 @@ const SnowBuddy = () => {
     FurryBall.castShadow = true;
     FurryBall.translateX(8);
 
+    const xmasBall3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), xmas3);
+    xmasBall3.castShadow = true;
+    xmasBall3.translateX(8);
+
+    const xmasBall1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
+        0.85, 30, 8), xmas1);
+    xmasBall1.castShadow = true;
+    xmasBall1.translateX(8);
+
 
     shirtArray[0] = middleBall;
     shirtArray[1] = hawaiianBall;
@@ -295,6 +317,8 @@ const SnowBuddy = () => {
     shirtArray[6] = dotsBall;
     shirtArray[7] = DownCoat;
     shirtArray[8] = FurryBall;
+    shirtArray[9] = xmasBall3;
+    shirtArray[10] = xmasBall1;
 
 
 
@@ -678,7 +702,91 @@ const SnowBuddy = () => {
     scarf.add(neckPart);
     scarf.add(clothFlowingPart);
 
+
+    // 2) blue scarf
+
+    const scarf2 = new THREE.Mesh(new CylinderBufferGeometry(
+        0.65, 0.65, 0.15), blueDots);
+    scarf2.translateY(-0.55);
+
+    const scarfTail2 = new THREE.Mesh(new PlaneGeometry(0.3, 1), blueDots);
+    scarfTail2.translateY(-1);
+    scarfTail2.translateZ(1);
+    scarfTail2.translateX(0.3);
+
+    const scarf2Group = new THREE.Group();
+    scarf2Group.add(scarf2);
+    scarf2Group.add(scarfTail2);
+    scarf2Group.translateX(8);
+
+
+    // 2) yellowOrange Scarf
+
+    const scarf3 = new THREE.Mesh(new CylinderBufferGeometry(
+        0.65, 0.65, 0.15), yellowOrange);
+    scarf3.translateY(-0.55);
+
+    const scarfTail3 = new THREE.Mesh(new PlaneGeometry(0.3, 1), yellowOrange);
+    scarfTail3.translateY(-1);
+    scarfTail3.translateZ(1);
+    scarfTail3.translateX(0.3);
+
+    const scarf3Group = new THREE.Group();
+    scarf3Group.add(scarf3);
+    scarf3Group.add(scarfTail3);
+    scarf3Group.translateX(8);
+
+
+    // 4) yellowOrange Scarf
+
+    const scarf4 = new THREE.Mesh(new CylinderBufferGeometry(
+        0.65, 0.65, 0.15), dustyPink);
+    scarf4.translateY(-0.55);
+
+    const scarfTail4 = new THREE.Mesh(new PlaneGeometry(0.2, 1), dustyPink);
+    scarfTail4.translateY(-1);
+    scarfTail4.translateZ(1);
+    scarfTail4.translateX(0.3);
+
+    const secondScarfTail = new THREE.Mesh(new PlaneGeometry(0.2, 1), dustyPink2);
+    secondScarfTail.translateY(-1);
+    secondScarfTail.translateZ(0.7);
+    secondScarfTail.translateX(0.5);
+    secondScarfTail.rotation.z = Math.PI/ 9.5;
+
+    const scarf4Group = new THREE.Group();
+    scarf4Group.add(scarf4);
+    scarf4Group.add(scarfTail4);
+    scarf4Group.add(secondScarfTail);
+    scarf4Group.translateX(8);
+
+
+    // 5) Flying Scarf 5
+    const scarf5 = new THREE.Mesh(new CylinderBufferGeometry(0.65, 0.65, 0.15), Stripes);
+    scarf5.translateY(-0.55);
+
+    const clothFlowingPart2 = new THREE.Mesh(new PlaneGeometry(0.3, 2), Stripes);
+    clothFlowingPart2.translateX(-1);
+    clothFlowingPart2.translateY(-0.3);
+    clothFlowingPart2.rotation.x = Math.PI/ 4;
+    clothFlowingPart2.rotation.z = 180;
+
+    scarf5.castShadow = true;
+    clothFlowingPart2.castShadow = true;
+
+    const scarf5Group = new THREE.Group();
+    scarf5Group.add(scarf5);
+    scarf5Group.add(clothFlowingPart2);
+    scarf5Group.translateX(8);
+
     scarfArray[0] = scarf;
+    scarfArray[1] = scarf2Group;
+    scarfArray[2] = scarf3Group;
+    scarfArray[3] = scarf4Group;
+    scarfArray[4] = scarf5Group;
+
+
+
     
 
     //Group head
@@ -708,7 +816,10 @@ const SnowBuddy = () => {
     headGroup.add(shockSphere);
     //SCARF
     headGroup.add(scarf);
-
+    headGroup.add(scarf2Group);
+    headGroup.add(scarf3Group);
+    headGroup.add(scarf4Group);
+    headGroup.add(scarf5Group);
 
 
     //INTERACTIONS
@@ -855,6 +966,8 @@ const SnowBuddy = () => {
     middleBallGroup.add(dotsBall);
     middleBallGroup.add(DownCoat);
     middleBallGroup.add(FurryBall);
+    middleBallGroup.add(xmasBall3);
+    middleBallGroup.add(xmasBall1);
     //
     middleBallGroup.add(button1);
     middleBallGroup.add(button2);
