@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/cjlogue/CGProject/issues"
   },
+  "engines": {
+    "node": "2.x"
+  },
   "homepage": "https://github.com/cjlogue/CGProject#readme",
   "description": ""
 }
