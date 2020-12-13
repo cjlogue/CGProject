@@ -61,9 +61,11 @@ const displayNext =  (itemArray, itemIdx, key) => {
         case "shirt":
             if (itemIdx === shirtArray.length -1) {
                 shirtIndex = -1;
+                console.log(shirtIndex);
             }
             else {
                 shirtIndex = itemIdx + 1;
+                console.log("shirt index ="  + shirtIndex);
             }
             break;
         default:
@@ -124,10 +126,11 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             break;
         case "shirt":
             if (itemIdx === 0) {
-                mouthIndex = mouthArray.length;
+                shirtIndex = shirtArray.length;
             }
             else {
-                mouthIndex = itemIdx - 1;
+                shirtIndex = itemIdx - 1;
+                console.log("shirt index ="  + shirtIndex);
             }
             break;
         default:
@@ -846,7 +849,7 @@ const SnowBuddy = () => {
     const previousEye = document.getElementById('previousEyes')
     if(previousEye) {
         previousEye.addEventListener("click", () => displayPrevious(eyeArray, eyeIndex, "eye"));
-        console.log(hatArray.length);
+        console.log(eyeArray.length);
     }
 
     //nose
