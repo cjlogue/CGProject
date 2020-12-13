@@ -32,14 +32,17 @@ const displayNext =  (itemArray, itemIdx, key) => {
             }
             else {
                 hatIndex = itemIdx + 1;
+                console.log("hatIndex =" + hatIndex)
             }
             break;
         case "eye":
-            if (itemIdx === eyeArray.length) {
+            if (itemIdx === eyeArray.length -1) {
                 eyeIndex = -1;
+                console.log("eyeIndex =" + eyeIndex)
             }
             else {
                 eyeIndex = itemIdx + 1;
+                console.log("eyeIndex =" + eyeIndex)
             }
             break;
         case "nose":
@@ -53,6 +56,7 @@ const displayNext =  (itemArray, itemIdx, key) => {
         case "mouth":
             if (itemIdx === mouthArray.length -1) {
                 mouthIndex = -1;
+                console.log(mouthIndex);
             }
             else {
                 mouthIndex = itemIdx + 1;
@@ -93,7 +97,7 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     }
     switch(key) {
         case "hat":
-            if (itemIdx === 0) {
+            if (itemIdx === -1) {
                 hatIndex = hatArray.length;
             }
             else {
@@ -101,7 +105,7 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             }
             break;
         case "eye":
-            if (itemIdx === 0) {
+            if (itemIdx === -1) {
                 eyeIndex = eyeArray.length;
             }
             else {
@@ -109,7 +113,7 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             }
             break;
         case "nose":
-            if (itemIdx === 0) {
+            if (itemIdx === -1) {
                 noseIndex = noseArray.length;
             }
             else {
@@ -117,15 +121,15 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             }
             break;
         case "mouth":
-            if (itemIdx === 0) {
-                mouthIndex = mouthArray.length;
+            if (itemIdx === -1) {
+                mouthIndex = mouthArray.length -1;
             }
             else {
                 mouthIndex = itemIdx - 1;
             }
             break;
         case "shirt":
-            if (itemIdx === 0) {
+            if (itemIdx === -1) {
                 shirtIndex = shirtArray.length;
             }
             else {
@@ -134,7 +138,7 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
             }
             break;
         default:
-            if (itemIdx === 0) {
+            if (itemIdx === -1) {
                 scarfIndex = scarfArray.length;
             }
             else {
@@ -597,7 +601,7 @@ const SnowBuddy = () => {
     topHat.add(brim);
     topHat.add(band);
     topHat.translateY(1);
-    //topHat.translateX(4); START ON HEAD FIRST
+    //topHat.translateX(2);
 
 
     // 2) Birthday Hat
