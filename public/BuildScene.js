@@ -1,7 +1,6 @@
 import * as THREE from './three.module.js';
+
 import {BoxBufferGeometry, CylinderBufferGeometry, PlaneGeometry} from "./three.module.js";
-
-
 
 import {MtlObjBridge} from './three.js-master/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
 
@@ -10,18 +9,15 @@ import {OBJLoader2} from './three.js-master/examples/jsm/loaders/OBJLoader2.js';
 import {MTLLoader} from './three.js-master/examples/jsm/loaders/MTLLoader.js';
 
 
-
-
-
 const displayNext =  (itemArray, itemIdx, key) => {
 
     for (let i = 0; i < itemArray.length; i++) {
 
         if (i === itemIdx) {
-            itemArray[i].translateX(8);
+            itemArray[i].translateX(16);
         }
         if (i === itemIdx + 1) {
-            itemArray[i].translateX(-8);
+            itemArray[i].translateX(-16);
         }
     }
     switch(key) {
@@ -89,10 +85,10 @@ const displayPrevious =  (itemArray, itemIdx, key) => {
     for (let i = 0; i < itemArray.length; i++) {
 
         if (i === itemIdx) {
-            itemArray[i].translateX(8);
+            itemArray[i].translateX(16);
         }
         if (i === itemIdx - 1) {
-            itemArray[i].translateX(-8);
+            itemArray[i].translateX(-16);
         }
     }
     switch(key) {
@@ -267,52 +263,52 @@ const SnowBuddy = () => {
     const hawaiianBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), hawaiianShirt);
     hawaiianBall.castShadow = true;
-    hawaiianBall.translateX(8);
+    hawaiianBall.translateX(16);
 
     const bananaBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), bananaShirt);
     bananaBall.castShadow = true;
-    bananaBall.translateX(8);
+    bananaBall.translateX(16);
 
     const sweater1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), winterSweater1);
     sweater1.castShadow = true;
-    sweater1.translateX(8);
+    sweater1.translateX(16);
 
     const sweater2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), winterSweater2);
     sweater2.castShadow = true;
-    sweater2.translateX(8);
+    sweater2.translateX(16);
 
     const cowBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), cowShirt);
     cowBall.castShadow = true;
-    cowBall.translateX(8);
+    cowBall.translateX(16);
 
     const dotsBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), blueDots);
     dotsBall.castShadow = true;
-    dotsBall.translateX(8);
+    dotsBall.translateX(16);
 
     const DownCoat = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), DownCoatMaterial);
     DownCoat.castShadow = true;
-    DownCoat.translateX(8);
+    DownCoat.translateX(16);
 
     const FurryBall = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), Fur);
     FurryBall.castShadow = true;
-    FurryBall.translateX(8);
+    FurryBall.translateX(16);
 
     const xmasBall3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), xmas3);
     xmasBall3.castShadow = true;
-    xmasBall3.translateX(8);
+    xmasBall3.translateX(16);
 
     const xmasBall1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.85, 30, 8), xmas1);
     xmasBall1.castShadow = true;
-    xmasBall1.translateX(8);
+    xmasBall1.translateX(16);
 
 
     shirtArray[0] = middleBall;
@@ -345,7 +341,7 @@ const SnowBuddy = () => {
         0.12, 8, 8), redColor);
     clownNose.translateZ(1);
     clownNose.translateY(-.1);
-    clownNose.translateX(8);
+    clownNose.translateX(16);
 
     // 3) Ice Cream Nose
     const iceCreamNose = new THREE.Mesh(new THREE.ConeBufferGeometry(
@@ -353,21 +349,21 @@ const SnowBuddy = () => {
     iceCreamNose.translateZ(1);
     iceCreamNose.translateY(-0.1);
     iceCreamNose.rotateX(90);
-    iceCreamNose.translateX(8);
+    iceCreamNose.translateX(16);
 
     // 4) Knot Nose
     const knotNose = new THREE.Mesh(new THREE.TorusKnotBufferGeometry(
         0.07, 0.015, 64, 8), purple);
     knotNose.translateZ(1);
     knotNose.translateY(-.1);
-    knotNose.translateX(8);
+    knotNose.translateX(16);
 
     // 5) Button Nose
     const buttonNose = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.08, 8, 8), hatColor);
     buttonNose.translateZ(1);
     buttonNose.translateY(-.1);
-    buttonNose.translateX(8);
+    buttonNose.translateX(16);
 
 
     noseArray[0] = carrotNose;
@@ -392,8 +388,8 @@ const SnowBuddy = () => {
     buttonEyes.add(leftEye);
     buttonEyes.add(rightEye);
     //buttonEyes.translateY(0.5);
-    buttonEyes.translateZ(1.5);
-    //buttonEyes.translateX(8);
+    buttonEyes.translateZ(1);
+    //buttonEyes.translateX(16);
 
 
     // 2) Glasses
@@ -410,7 +406,7 @@ const SnowBuddy = () => {
     sunGlasses.add(rightGlass);
     sunGlasses.add(connector);
     sunGlasses.translateZ(1);
-    sunGlasses.translateX(8);
+    sunGlasses.translateX(16);
 
     // 2) Torus Eyes
 
@@ -421,9 +417,9 @@ const SnowBuddy = () => {
     const torusEyes = new THREE.Group();
     torusEyes.add(leftTorus);
     torusEyes.add(rightTorus);
-    torusEyes.translateZ(1.5);
+    torusEyes.translateZ(1);
     torusEyes.translateX(.3);
-    torusEyes.translateX(8);
+    torusEyes.translateX(16);
 
 
     // 4) Heart Eyes
@@ -451,10 +447,10 @@ const SnowBuddy = () => {
     heartEyes.add(leftHeart);
     heartEyes.add(rightHeart);
 
-    heartEyes.translateZ(1.5);
+    heartEyes.translateZ(1);
     heartEyes.scale.y = 2;
     heartEyes.scale.x = 2;
-    heartEyes.translateX(8);
+    heartEyes.translateX(16);
 
 
     // 5) Gold Ring Eyes
@@ -467,9 +463,9 @@ const SnowBuddy = () => {
     const ringEyes = new THREE.Group();
     ringEyes.add(leftRing);
     ringEyes.add(rightRing);
-    ringEyes.translateZ(1.5);
+    ringEyes.translateZ(1);
     ringEyes.translateX(.3);
-    ringEyes.translateX(8);
+    ringEyes.translateX(16);
 
 
     eyeArray[0] = buttonEyes;
@@ -483,34 +479,34 @@ const SnowBuddy = () => {
     // 1) Button Sphere Mouth
     const sphere1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere1.translateZ(1.5);
-    sphere1.translateY(-0.45);
+    sphere1.translateZ(1);
+    sphere1.translateY(-0.4);
 
     const sphere2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere2.translateZ(2.59);
+    sphere2.translateZ(1);
     sphere2.translateX(0.15)
-    sphere2.translateY(-0.45);
+    sphere2.translateY(-0.35);
 
     const sphere3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere3.translateZ(2.59);
+    sphere3.translateZ(1);
     sphere3.translateX(-0.15)
-    sphere3.translateY(-0.45);
+    sphere3.translateY(-0.35);
 
 
     const sphere4 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere4.translateZ(4.5);
-    sphere4.translateX(0.25);
-    sphere4.translateY(-0.45);
+    sphere4.translateZ(1);
+    sphere4.translateX(0.3);
+    sphere4.translateY(-0.29);
 
 
     const sphere5 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere5.translateZ(4.5);
-    sphere5.translateX(-0.25)
-    sphere5.translateY(-0.45);
+    sphere5.translateZ(1);
+    sphere5.translateX(-0.3)
+    sphere5.translateY(-0.29);
 
     const mouthGroup = new THREE.Group();
     mouthGroup.add(sphere1);
@@ -523,34 +519,34 @@ const SnowBuddy = () => {
     //2) Blushing Mouth:
     const sphere6 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere6.translateZ(1.5);
-    sphere6.translateY(-0.45);
+    sphere6.translateZ(1);
+    sphere6.translateY(-0.4);
 
     const sphere7 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere7.translateZ(2.59);
+    sphere7.translateZ(1);
     sphere7.translateX(0.15)
-    sphere7.translateY(-0.45);
+    sphere7.translateY(-0.35);
 
     const sphere8 = new THREE.Mesh(new THREE.SphereBufferGeometry(
         0.05, 4, 4), hatColor);
-    sphere8.translateZ(2.59);
+    sphere8.translateZ(1);
     sphere8.translateX(-0.15)
-    sphere8.translateY(-0.45);
+    sphere8.translateY(-0.35);
 
 
     const bigSphere1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.07, 4, 4), redColor);
-    bigSphere1.translateZ(4.5);
-    bigSphere1.translateX(0.25);
-    bigSphere1.translateY(-0.45);
+        0.09, 4, 4), redColor);
+    bigSphere1.translateZ(1);
+    bigSphere1.translateX(0.35);
+    bigSphere1.translateY(-0.29);
 
 
     const bigSphere2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.07, 4, 4), redColor);
-    bigSphere2.translateZ(4.5);
-    bigSphere2.translateX(-0.25);
-    bigSphere2.translateY(-0.45);
+        0.09, 4, 4), redColor);
+    bigSphere2.translateZ(1);
+    bigSphere2.translateX(-0.35);
+    bigSphere2.translateY(-0.29);
 
     const blushingMouthGroup = new THREE.Group();
     blushingMouthGroup.add(sphere6);
@@ -559,7 +555,7 @@ const SnowBuddy = () => {
     blushingMouthGroup.add(bigSphere1);
     blushingMouthGroup.add(bigSphere2);
     blushingMouthGroup.translateY(0.05);
-    blushingMouthGroup.translateX(8);
+    blushingMouthGroup.translateX(16);
 
     //3) Shock-Sphere Mouth
     const halfMouth = new THREE.Mesh(new THREE.SphereBufferGeometry(0.12,
@@ -568,16 +564,16 @@ const SnowBuddy = () => {
 
     const secondHalfMouth = new THREE.Mesh(new THREE.SphereBufferGeometry(0.06,
         10, 10), sombreroColor);
-    secondHalfMouth.translateY(-0.15);
-    secondHalfMouth.translateZ(3.5);
+    secondHalfMouth.translateY(-0.07);
+    secondHalfMouth.translateZ(1);
     //secondHalfMouth.rotateZ(-50);
 
     const shockSphere = new THREE.Group();
     shockSphere.add(halfMouth);
     shockSphere.add(secondHalfMouth);
-    shockSphere.translateY(-0.45);
-    shockSphere.translateZ(4.5);
-    shockSphere.translateX(8);
+    shockSphere.translateY(-0.3);
+    shockSphere.translateZ(1);
+    shockSphere.translateX(16);
 
     mouthArray[0] = mouthGroup;
     mouthArray[1] = blushingMouthGroup;
@@ -618,7 +614,7 @@ const SnowBuddy = () => {
     birthdayHat.add(coneHat);
     birthdayHat.add(puffBall);
     birthdayHat.translateY(1);
-    birthdayHat.translateX(8);
+    birthdayHat.translateX(16);
 
 
     //3) Sombrero
@@ -633,7 +629,7 @@ const SnowBuddy = () => {
     const sombreroHat = new THREE.Group();
     sombreroHat.add(sombrero);
     sombreroHat.add(sombreroBrim);
-    sombreroHat.translateX(8);
+    sombreroHat.translateX(16);
 
 
     //4) Snow Hat
@@ -660,7 +656,7 @@ const SnowBuddy = () => {
     snowHatGroup.add(snowHatFold);
     snowHatGroup.add(roundHatTop);
     snowHatGroup.add(pomPom);
-    snowHatGroup.translateX(8);
+    snowHatGroup.translateX(16);
 
 
     // 5) Graduation Cap
@@ -677,7 +673,7 @@ const SnowBuddy = () => {
     const graduationCapGroup = new THREE.Group();
     graduationCapGroup.add(graduationCap);
     graduationCapGroup.add(graduationBrim);
-    graduationCapGroup.translateX(8);
+    graduationCapGroup.translateX(16);
 
 
     hatArray[0] = topHat;
@@ -724,7 +720,7 @@ const SnowBuddy = () => {
     const scarf2Group = new THREE.Group();
     scarf2Group.add(scarf2);
     scarf2Group.add(scarfTail2);
-    scarf2Group.translateX(8);
+    scarf2Group.translateX(16);
 
 
     // 2) yellowOrange Scarf
@@ -741,7 +737,7 @@ const SnowBuddy = () => {
     const scarf3Group = new THREE.Group();
     scarf3Group.add(scarf3);
     scarf3Group.add(scarfTail3);
-    scarf3Group.translateX(8);
+    scarf3Group.translateX(16);
 
 
     // 4) yellowOrange Scarf
@@ -765,7 +761,7 @@ const SnowBuddy = () => {
     scarf4Group.add(scarf4);
     scarf4Group.add(scarfTail4);
     scarf4Group.add(secondScarfTail);
-    scarf4Group.translateX(8);
+    scarf4Group.translateX(16);
 
 
     // 5) Flying Scarf 5
@@ -784,7 +780,7 @@ const SnowBuddy = () => {
     const scarf5Group = new THREE.Group();
     scarf5Group.add(scarf5);
     scarf5Group.add(clothFlowingPart2);
-    scarf5Group.translateX(8);
+    scarf5Group.translateX(16);
 
     scarfArray[0] = scarf;
     scarfArray[1] = scarf2Group;
@@ -900,8 +896,6 @@ const SnowBuddy = () => {
     if(previousScarf) {
         previousScarf.addEventListener("click", () => displayPrevious(scarfArray, scarfIndex, "scarf"));
     }
-
-
 
 
 
@@ -1052,22 +1046,11 @@ const createFloor = () => {
     pineTree.add(pineBottom);
     pineTree.add(pineTrunk);
 
-
-
     /* scene.add(pineTree);
     pineTree.translateZ(-1.9);
     pineTree.translateX(-4); */
 
 
-    //North Pole
-    /* const objLoader = new OBJLoader2();
-    objLoader.load('./Pole.obj', (root) => {
-        scene.add(root);
-            root.translateX(3);
-            root.translateY(-3);
-            root.translateZ(-3);
-    });
- */
     const mtlLoader = new MTLLoader();
 mtlLoader.load('./Pole.mtl', (mtlParseResult) => {
     const objLoader = new OBJLoader2();
@@ -1136,6 +1119,8 @@ function createLighting() {
 
 
 let scene;
+let camera;
+
 const main = () => {
 
     // // CLOCK for timing functions
@@ -1150,10 +1135,6 @@ const main = () => {
         alpha: true,
     });
 
- /*    document.getElementById("name").onclick = function(){
-        var name;
-        document.getElementById("myText").innerText = name; 
-    } */
 
     // SCENE
     scene = new THREE.Scene();
@@ -1166,6 +1147,39 @@ const main = () => {
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     camera.position.set(0, 0.3, 16); //move the camera a back
+
+    //CAMERA
+    const camForward = document.getElementById('camForward')
+    if(camForward) {
+        camForward.addEventListener("click", () => moveCamForward(camera));
+    }
+
+    const camBackward = document.getElementById('camBackward')
+    if(camBackward) {
+        camBackward.addEventListener("click", () => moveCamBackward(camera));
+    }
+
+    const camRight = document.getElementById('camRight')
+    if(camRight) {
+        camRight.addEventListener("click", () => moveCamRight(camera));
+    }
+
+    const camLeft = document.getElementById('camLeft')
+    if(camLeft) {
+        camLeft.addEventListener("click", () => moveCamLeft(camera));
+    }
+
+    const camUp = document.getElementById('camUp')
+    if(camUp) {
+        camUp.addEventListener("click", () => moveCamUp(camera));
+    }
+
+    const camDown = document.getElementById('camDown')
+    if(camDown) {
+        camDown.addEventListener("click", () => moveCamDown(camera));
+    }
+
+
     scene.add(camera);
 
     createFloor();
@@ -1191,6 +1205,9 @@ const main = () => {
     }
 
     requestAnimationFrame(drawScene)
+
+    var text = document.getElementsByName('myText').value;
+    console.log(text);
 
     // Bouncing Snow Friend
 
@@ -1230,10 +1247,10 @@ const main = () => {
     const carrotColor = new THREE.MeshPhongMaterial({
                                                         color: 0xda841c});
     const carrotNose = new THREE.Mesh(new THREE.ConeBufferGeometry(0.12, 0.16, 7), carrotColor);
-    carrotNose.translateZ(2.5);
+    carrotNose.translateZ(1);
     // carrotNose.translateY(-0.1);
     carrotNose.rotateX(114.8);
-    carrotNose.translateX(3.4);
+    carrotNose.translateX(3.8);
     carrotNose.scale.x = .8;
     carrotNose.scale.y = .8;
     carrotNose.scale.z = .8;
@@ -1252,29 +1269,29 @@ const main = () => {
     const buttonEyes = new THREE.Group();
     buttonEyes.add(leftEye);
     buttonEyes.add(rightEye);
-    buttonEyes.translateZ(2);
-    buttonEyes.translateX(3.5);
+    buttonEyes.translateZ(1);
+    buttonEyes.translateX(3.8);
     buttonEyes.translateY(.2);
 
     // Snow Friend Mouth
 
     const mouth1 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.06, 8, 8), hatColor);
-    mouth1.translateX(-0.2);
+        0.05, 8, 8), hatColor);
+    mouth1.translateX(-0.25);
     const mouth2 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.04, 8, 8), hatColor);
-    mouth2.translateX(-0.1);
-    mouth2.translateY(-.04);
+        0.05, 8, 8), hatColor);
+    mouth2.translateX(-0.165);
+    mouth2.translateY(-0.1);
     const mouth3 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.04, 8, 8), hatColor);
-    mouth3.translateY(-0.07);
+        0.05, 8, 8), hatColor);
+    mouth3.translateY(-0.15);
     const mouth4 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.04, 8, 8), hatColor);
-    mouth4.translateX(0.1);
-    mouth4.translateY(-.04);
+        0.05, 8, 8), hatColor);
+    mouth4.translateX(0.165);
+    mouth4.translateY(-0.1);
     const mouth5 = new THREE.Mesh(new THREE.SphereBufferGeometry(
-        0.06, 8, 8), hatColor);
-    mouth5.translateX(0.2);
+        0.05, 8, 8), hatColor);
+    mouth5.translateX(0.25);
 
     const buttonMouth = new THREE.Group();
     buttonMouth.add(mouth1);
@@ -1282,8 +1299,8 @@ const main = () => {
     buttonMouth.add(mouth3);
     buttonMouth.add(mouth4);
     buttonMouth.add(mouth5);
-    buttonMouth.translateZ(2.5);
-    buttonMouth.translateX(3.4);
+    buttonMouth.translateZ(1);
+    buttonMouth.translateX(3.8);
     buttonMouth.translateY(-.15);
 
     // Snow Friend Hat
@@ -1344,6 +1361,44 @@ const main = () => {
 
 // START
 main();
+
+
+function moveCamForward(camera) {
+    if (camera.position.z >= 5) {
+        camera.translateZ(-1);
+        console.log("camera" + camera.position.z)
+    }
+}
+
+function moveCamBackward(camera) {
+    if (camera.position.z <= 16) {
+        camera.translateZ(1);
+    }
+}
+
+function moveCamRight(camera) {
+    if (camera.position.x <= 4) {
+        camera.translateX(1);
+    }
+}
+
+function moveCamLeft(camera) {
+    if (camera.position.x >= -4) {
+        camera.translateX(-1);
+    }
+}
+
+function moveCamUp(camera) {
+    if (camera.position.y <= 1) {
+        camera.translateY(0.1);
+    }
+}
+
+function moveCamDown(camera) {
+    if (camera.position.y >= 0.1) {
+        camera.translateY(-0.1);
+    }
+}
 
 
 
