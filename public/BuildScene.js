@@ -570,7 +570,7 @@ const SnowBuddy = () => {
 
     const shockSphere = new THREE.Group();
     shockSphere.add(halfMouth);
-    shockSphere.add(secondHalfMouth);
+    //shockSphere.add(secondHalfMouth);
     shockSphere.translateY(-0.3);
     shockSphere.translateZ(1);
     shockSphere.translateX(16);
@@ -1002,7 +1002,7 @@ const createFloor = () => {
 
 
 
-    const planeGeo = new THREE.PlaneGeometry(15, 30, 0.5, 0.5);
+    const planeGeo = new THREE.PlaneGeometry(50, 30, 0.5, 0.5);
     const planeMat = new THREE.MeshPhongMaterial({color: snowColor, side: THREE.DoubleSide});
     const plane = new THREE.Mesh(planeGeo, planeMat);
 
