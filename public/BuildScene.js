@@ -1150,6 +1150,11 @@ const main = () => {
         alpha: true,
     });
 
+ /*    document.getElementById("name").onclick = function(){
+        var name;
+        document.getElementById("myText").innerText = name; 
+    } */
+
     // SCENE
     scene = new THREE.Scene();
 

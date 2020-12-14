@@ -42,6 +42,17 @@ a:hover {
     color: steelblue;
 }
 
+label {
+    text-align: right;
+    font-family: Blenny;
+    color: steelblue;
+    font-size: xx-large;
+}
+
+button {
+    height: 15px;
+}
+
 /*.previousHat {*/
 /*    background-color: steelblue;*/
 /*    color: white;*/
